@@ -146,17 +146,25 @@ http://127.0.0.1:5000
 
 ## 📊 Evaluasi Model
 
-Evaluasi kualitas respons chatbot dilakukan menggunakan **BERTScore** untuk mengukur kesesuaian semantik antara jawaban yang dihasilkan sistem dan jawaban referensi.
+Evaluasi performa chatbot dilakukan menggunakan **BERTScore** untuk mengukur tingkat kesesuaian semantik antara jawaban yang dihasilkan chatbot (*generated answer*) dengan jawaban referensi (*reference answer*).
 
-Hasil evaluasi yang diperoleh:
+Pengujian dilakukan terhadap 10 pertanyaan seputar informasi pendaftaran sekolah. Evaluasi menggunakan tiga metrik utama, yaitu Precision, Recall, dan F1-Score.
 
-| Metrik | Hasil |
+### Hasil Evaluasi
+
+| Metrik | Nilai Rata-rata |
 |---|---:|
-| BERTScore Precision | 90% |
-| BERTScore Recall | 95% |
-| BERTScore F1-Score | 92% |
+| BERTScore Precision | 87% |
+| BERTScore Recall | 85% |
+| BERTScore F1-Score | 86% |
 
-Hasil tersebut menunjukkan tingkat kesesuaian semantik yang baik antara respons chatbot dan jawaban referensi berdasarkan pengujian yang dilakukan.
+### Analisis Hasil
+
+Berdasarkan hasil pengujian, chatbot memperoleh nilai rata-rata BERTScore Precision sebesar 87%, Recall sebesar 85%, dan F1-Score sebesar 86%.
+
+Hasil tersebut menunjukkan bahwa chatbot mampu menghasilkan jawaban dengan tingkat kesesuaian semantik yang baik terhadap jawaban referensi. Nilai F1-Score sebesar 86% menunjukkan keseimbangan antara kemampuan sistem dalam mempertahankan relevansi informasi dan menangkap makna dari jawaban referensi.
+
+Dengan demikian, pendekatan Retrieval-Augmented Generation (RAG) yang diterapkan dapat membantu chatbot memberikan respons yang relevan berdasarkan informasi yang tersedia dalam knowledge base.
 
 ## 🎯 Tujuan Pengembangan
 

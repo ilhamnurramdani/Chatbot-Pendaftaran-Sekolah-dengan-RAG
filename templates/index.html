@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-g">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi TK AR-RAFI🏫</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+    body {
+        /* GANTI 'nama_gambar.jpg' DENGAN NAMA FILE GAMBAR ANDA */
+        background-image: url("{{ url_for('static', filename='bg.png') }}");
+        
+        /* Agar gambar memenuhi layar */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+</style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Informasi TK AR-RAFI🏫</h1>
+        <div id="chat-box" class="chat-box">
+            <div class="message bot">
+                <p>Halo! Silakan ajukan pertanyaan Anda.</p>
+            </div>
+        </div>
+        <form id="chat-form" class="chat-form">
+            <input type="text" id="user-input" placeholder="Ketik pertanyaan Anda di sini..." autocomplete="off" required>
+            <button type="submit">Kirim</button>
+        </form>
+    </div>
+
+    <script>
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const chatBox = document.getElementById('chat-box');
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const query = userInput.value.trim();
+            if (!query) return;
+
+            // Tampilkan pertanyaan pengguna di chat box
+            appendMessage(query, 'user');
+            userInput.value = '';
+
+            // Tampilkan pesan "loading"
+            const thinkingMessage = appendMessage('Sedang berpikir...', 'bot', true);
+
+            try {
+                // Kirim pertanyaan ke backend Flask
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ question: query })
+                });
+                
+                const data = await response.json();
+                
+                // Hapus pesan "loading" dan tampilkan jawaban dari bot
+                thinkingMessage.remove();
+                appendMessage(data.answer, 'bot');
+
+            } catch (error) {
+                thinkingMessage.remove();
+                appendMessage('Maaf, terjadi kesalahan. Coba lagi.', 'bot');
+                console.error('Error:', error);
+            }
+        });
+
+        function appendMessage(text, sender, isLoading = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender);
+
+            const p = document.createElement('p');
+            p.textContent = text;
+            messageDiv.appendChild(p);
+
+            if (isLoading) {
+                messageDiv.id = 'thinking-message';
+            }
+
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll ke bawah
+            return messageDiv;
+        }
+    </script>
+</body>
+</html>

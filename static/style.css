@@ -1,0 +1,127 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    
+    /* PERUBAHAN: Hapus background-color solid, ganti dengan properti background image */
+    background-color: #f4f7f6; /* Warna cadangan jika gambar gagal dimuat */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; /* Agar background diam saat scroll */
+
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-container {
+    width: 90%;
+    max-width: 600px;
+    height: 90vh;
+    
+    /* PERUBAHAN: Menggunakan RGBA agar transparan (0.9 = 90% terlihat, agak tembus pandang) */
+    background-color: rgba(255, 255, 255, 0.85); 
+    
+    /* TAMBAHAN: Efek blur di belakang container (Glassmorphism) - Opsional tapi keren */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Shadow sedikit lebih gelap agar kontras */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    padding: 20px;
+    margin: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Border lebih halus */
+    
+    /* PERUBAHAN: Background header juga dibuat sedikit transparan */
+    background-color: rgba(250, 250, 250, 0.9);
+}
+
+.chat-box {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 80%;
+    line-height: 1.5;
+}
+
+.message p {
+    margin: 0;
+}
+
+.message.user {
+    background-color: #007bff;
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Tambahan shadow kecil */
+}
+
+.message.bot {
+    background-color: #e9e9eb; /* Sedikit lebih gelap agar terlihat di background transparan */
+    color: #333;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#thinking-message p {
+    font-style: italic;
+}
+
+.chat-form {
+    display: flex;
+    padding: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    
+    /* PERUBAHAN: Background form input juga transparan */
+    background-color: rgba(250, 250, 250, 0.9);
+}
+
+#user-input {
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 16px;
+    /* Agar input field tidak transparan (tetap putih solid agar mudah dibaca) */
+    background-color: #fff; 
+}
+
+#user-input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s; /* Animasi hover */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
